@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet(
     name = "StudentServlet",
@@ -38,9 +37,8 @@ public class StudentServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     List<Student> allStudents = studentDao.getAllStudent();
-    HttpSession session = request.getSession(true);
-    session.setAttribute("studentList",allStudents);
-    request.getRequestDispatcher("/student-list").forward(request,response);
+    request.setAttribute("allStudents",allStudents);
+    request.getRequestDispatcher("/student-list.jsp").forward(request,response);
 
   }
 
